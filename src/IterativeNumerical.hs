@@ -1,5 +1,7 @@
 {-# LANGUAGE Arrows #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
+module IterativeNumerical (test, sgd) where
+
 
 {- 
 To incorporate:
@@ -34,6 +36,6 @@ sgd start = proc gf -> do
        x <- sumFromD start -< loc_change
    id -< x
 
-main = let gradienter_source = repeat $ \x -> Gradient $ 2*x
+test = let gradienter_source = repeat $ \x -> Gradient $ 2*x
            locations = streamAuto' (sgd 5) $ take 100 $ gradienter_source
        in do putStrLn $ show locations
